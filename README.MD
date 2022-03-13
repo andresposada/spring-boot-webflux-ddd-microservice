@@ -108,12 +108,15 @@ To be able to format the code properly with Google Java code formatter standards
 
 ### Checkstyle & Linting
 
-[Checkstyle gradle plugin](https://docs.gradle.org/current/userguide/checkstyle_plugin.html) are used enforce code formatting standards in this repository. Here are a few linter commands that are useful to run locally :
-
+[Checkstyle gradle plugin](https://docs.gradle.org/current/userguide/checkstyle_plugin.html) are used enforce code 
+formatting standards in this repository. Here are a few linter commands that are useful to run locally :
 ```
 # Check code against linting rules. This command is run in the CI/CD pipeline as well.
 ./gradlew check
 ```
+Plugin configuration is located in `/config/checkstyle/checkstyle.xml`folder. 
+
+Further information about checkstyle config can be found [here](https://checkstyle.sourceforge.io/config.html)
 
 This plugin help to maintain the code clean and well structure following the  
 [Java Code Conventions](https://www.oracle.com/java/technologies/javase/codeconventions-contents.html) dictated by 
