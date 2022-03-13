@@ -1,0 +1,4 @@
+rootProject.name = 'ddd-microservice'
+include 'application'
+include 'core'
+include 'infrastructure'
