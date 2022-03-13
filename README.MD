@@ -122,6 +122,16 @@ This plugin help to maintain the code clean and well structure following the
 [Java Code Conventions](https://www.oracle.com/java/technologies/javase/codeconventions-contents.html) dictated by 
 Oracle. This plugin checks the code style when build the project, but you can also check manually
 
+### Fitness Functions
+A fitness function is used to summarize how close a given design solution is to achieve its aims. When defining an 
+evolutionary solution, the designer seeks a ‘better’ algorithm; the fitness function defines what ‘better’ means in this context.
+
+To accomplish that, we leverage on a well known framework named [ArchUnit](https://www.archunit.org/) which can help us
+to validate that our architecture decisions are compliant and the architecture structure in the code is exactly the 
+same as we defined.
+
+This fitness function are triggered alongside with unit tests in this project
+
 ### OpenAPI 3 docs generating
 OpenAPI is becoming the standard facto to generate API documentations and be able to exported to third-party 
 platforms to expose those services to our users. 
