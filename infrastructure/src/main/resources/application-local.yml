@@ -1,18 +1,24 @@
 spring:
-  r2dbc:
-    url: r2dbc:mysql://localhost:3307/ddd-db
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/ddd-db?allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: mysqlpass
-    pool:
-      initial-size: 5
-      max-size: 10
-      max-idle-time: 30m
-      validation-query: SELECT 1
+    initialization-mode: always
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+
+  # validate the schema, no changes to the database
+  # without it the application would start up even if the schema is not present
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
 
   # disable database initialisation with Spring JDBC, enabled by default
   flyway:
-    url: jdbc:mysql://localhost:3307/ddd-db
-    user: ${spring.r2dbc.username}
-    password: ${spring.r2dbc.password}
     enabled: true
     baseline-on-migrate: true

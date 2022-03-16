@@ -6,8 +6,9 @@ import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 import org.afp.dddmicroservice.core.common.constants.FitnessFunctionsConstants;
-import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.Entity;
 
 @AnalyzeClasses(packages = FitnessFunctionsConstants.PACKAGE_TO_SCAN)
 public class InfrastructureLayerRulesTest {
@@ -35,7 +36,7 @@ public class InfrastructureLayerRulesTest {
   static final ArchRule entities_must_reside_in_a_domain_package =
       classes()
           .that()
-          .areAnnotatedWith(Table.class)
+          .areAnnotatedWith(Entity.class)
           .should()
           .resideInAPackage(ENTITIES_PACKAGE)
           .as("Entities should reside in a package " + ENTITIES_PACKAGE);
