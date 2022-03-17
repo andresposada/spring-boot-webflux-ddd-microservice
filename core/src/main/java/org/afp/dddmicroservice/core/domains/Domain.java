@@ -1,11 +1,10 @@
 package org.afp.dddmicroservice.core.domains;
 
+import java.time.Instant;
+import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-
-import java.time.Instant;
-import java.util.UUID;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)

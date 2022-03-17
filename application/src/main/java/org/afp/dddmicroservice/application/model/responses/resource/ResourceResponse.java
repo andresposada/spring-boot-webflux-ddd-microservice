@@ -1,11 +1,11 @@
 package org.afp.dddmicroservice.application.model.responses.resource;
 
-import org.afp.dddmicroservice.application.model.responses.DomainResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.FieldDefaults;
+import org.afp.dddmicroservice.application.model.responses.DomainResponse;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)

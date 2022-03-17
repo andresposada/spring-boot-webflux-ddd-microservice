@@ -2,11 +2,11 @@ package org.afp.dddmicroservice.application.config;
 
 import static org.springframework.http.HttpStatus.PRECONDITION_FAILED;
 
-import org.afp.dddmicroservice.application.model.responses.ErrorResponse;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
+import org.afp.dddmicroservice.application.model.responses.ErrorResponse;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

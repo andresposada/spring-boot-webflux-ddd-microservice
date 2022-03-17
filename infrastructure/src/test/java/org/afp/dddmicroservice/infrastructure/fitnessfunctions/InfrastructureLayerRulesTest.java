@@ -5,10 +5,9 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
+import javax.persistence.Entity;
 import org.afp.dddmicroservice.core.common.constants.FitnessFunctionsConstants;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.Entity;
 
 @AnalyzeClasses(packages = FitnessFunctionsConstants.PACKAGE_TO_SCAN)
 public class InfrastructureLayerRulesTest {

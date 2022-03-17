@@ -6,6 +6,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
+import java.util.concurrent.CompletableFuture;
 import org.afp.dddmicroservice.core.common.constants.FitnessFunctionsConstants;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -40,5 +41,7 @@ public class CoreLayerRulesTest {
           .should()
           .haveRawReturnType(Flux.class)
           .orShould()
-          .haveRawReturnType(Mono.class);
+          .haveRawReturnType(Mono.class)
+          .orShould()
+          .haveRawReturnType(CompletableFuture.class);
 }

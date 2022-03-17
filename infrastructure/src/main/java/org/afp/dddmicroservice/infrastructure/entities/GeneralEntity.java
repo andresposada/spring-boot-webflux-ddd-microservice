@@ -1,5 +1,13 @@
 package org.afp.dddmicroservice.infrastructure.entities;
 
+import java.time.Instant;
+import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,16 +16,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import java.time.Instant;
-import java.util.UUID;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -29,7 +27,7 @@ public abstract class GeneralEntity {
   @Column(name = "id", nullable = false, updatable = false, columnDefinition = "CHAR(36)")
   @GeneratedValue(generator = "uuid2")
   @GenericGenerator(name = "uuid2", strategy = "uuid2")
-  @Type(type="uuid-char")
+  @Type(type = "uuid-char")
   UUID id = UUID.randomUUID();
 
   @Column(name = "created_at", nullable = false)
@@ -50,5 +48,4 @@ public abstract class GeneralEntity {
   protected void onUpdate() {
     setUpdatedAt(Instant.now());
   }
-
 }

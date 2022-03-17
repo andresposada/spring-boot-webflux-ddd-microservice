@@ -52,10 +52,12 @@ public class ResourceController {
             content = @Content)
       })
   public Flux<ResourceResponse> getResources() {
-    return resourceUseCase
-        .getResources()
-        .map(mapper::resourceToResourceResponse);
+    return resourceUseCase.getFluxResource().map(mapper::resourceToResourceResponse);
+  }
 
+  @GetMapping("async")
+  public Flux<ResourceResponse> getResourcesAsync() {
+    return resourceUseCase.getResources().map(mapper::resourceToResourceResponse);
   }
 
   @PostMapping

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -23,16 +24,23 @@ public class ResourceRepositoryAdapter implements ResourceRepositoryPort {
 
   @Override
   public Flux<Resource> getResources() {
-    return Flux.fromIterable(resourceMySQLJPARepository.findAll()
-            .stream()
+    return Flux.fromIterable(
+        resourceMySQLJPARepository.findAll().stream()
             .map(resourceEntityMapper::resourceEntityToResource)
             .collect(Collectors.toList()));
   }
 
   @Override
+  public List<Resource> getResource() {
+    return resourceMySQLJPARepository.findAll().stream()
+        .map(resourceEntityMapper::resourceEntityToResource)
+        .collect(Collectors.toList());
+  }
+
+  @Override
   public Mono<Resource> save(Resource resource) {
-    var savedEntity = resourceMySQLJPARepository
-        .save(resourceEntityMapper.resourceToResourceEntity(resource));
-    return  Mono.just(resourceEntityMapper.resourceEntityToResource(savedEntity));
+    var savedEntity =
+        resourceMySQLJPARepository.save(resourceEntityMapper.resourceToResourceEntity(resource));
+    return Mono.just(resourceEntityMapper.resourceEntityToResource(savedEntity));
   }
 }

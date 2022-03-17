@@ -7,5 +7,7 @@ import reactor.core.publisher.Mono;
 public interface ResourceUseCase {
   Flux<Resource> getResources();
 
+  Flux<Resource> getFluxResource();
+
   Mono<Resource> saveResource(Resource resource);
 }
