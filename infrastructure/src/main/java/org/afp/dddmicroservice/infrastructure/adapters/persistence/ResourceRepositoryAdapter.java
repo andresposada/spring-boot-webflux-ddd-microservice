@@ -1,18 +1,17 @@
 package org.afp.dddmicroservice.infrastructure.adapters.persistence;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.afp.dddmicroservice.core.domains.resource.Resource;
 import org.afp.dddmicroservice.core.ports.outgoing.ResourceRepositoryPort;
-import org.afp.dddmicroservice.infrastructure.adapters.persistence.mappers.ResourceEntityMapper;
+import org.afp.dddmicroservice.infrastructure.mappers.ResourceEntityMapper;
 import org.afp.dddmicroservice.infrastructure.repositories.ResourceMySQLJPARepository;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -24,10 +23,11 @@ public class ResourceRepositoryAdapter implements ResourceRepositoryPort {
 
   @Override
   public Flux<Resource> getResources() {
-    return Flux.fromIterable(
+    var resources =
         resourceMySQLJPARepository.findAll().stream()
             .map(resourceEntityMapper::resourceEntityToResource)
-            .collect(Collectors.toList()));
+            .collect(Collectors.toList());
+    return Flux.fromIterable(resources);
   }
 
   @Override

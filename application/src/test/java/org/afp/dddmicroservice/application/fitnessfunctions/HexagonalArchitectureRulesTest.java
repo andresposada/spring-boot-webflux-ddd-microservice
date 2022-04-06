@@ -17,5 +17,6 @@ public class HexagonalArchitectureRulesTest {
           .domainServices("..core.ports.incoming..", "..core.ports.outgoing..", "..core.services..")
           .applicationServices("..application..")
           .adapter("rest", "..application.controllers..")
-          .adapter("persistence", "..adapters.persistence..");
+          .adapter("persistence", "..infrastructure.adapters.persistence..",
+                  "..infrastructure.mappers..", "..infrastructure.entities..", "..infrastructure.repositories..");
 }

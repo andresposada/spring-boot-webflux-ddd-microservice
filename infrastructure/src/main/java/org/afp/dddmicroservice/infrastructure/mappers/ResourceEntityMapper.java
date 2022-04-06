@@ -1,4 +1,4 @@
-package org.afp.dddmicroservice.infrastructure.adapters.persistence.mappers;
+package org.afp.dddmicroservice.infrastructure.mappers;
 
 import org.afp.dddmicroservice.core.domains.resource.Resource;
 import org.afp.dddmicroservice.infrastructure.entities.ResourceEntity;
