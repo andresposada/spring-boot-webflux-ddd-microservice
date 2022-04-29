@@ -130,7 +130,60 @@ To accomplish that, we leverage on a well known framework named [ArchUnit](https
 to validate that our architecture decisions are compliant and the architecture structure in the code is exactly the 
 same as we defined.
 
-This fitness function are triggered alongside with unit tests in this project
+This fitness function are triggered alongside with unit tests in this project. The following are 
+the **fitness functions** created in this repo:
+- Application layer
+- Core layer
+- Infrastructure layer
+
+### Mutation testing
+is a type of software testing in which certain statements of the source code are changed/mutated to check if the test cases are able to find errors in source code. The goal of Mutation Testing is ensuring the quality of test cases in terms of robustness that it should fail the mutated source code.
+
+The changes made in the mutant program should be kept tiny that it does not affect the overall objective of the program. Mutation Testing is also called Fault-based testing strategy as it involves creating a fault in the program and it is a type of White Box Testing which is mainly used for Unit Testing.
+
+The mutation testing are seamless integrated with the unit test suite leaning the framework to run it. When you run
+```
+./gradlew build
+```
+it automatically runs mutation testing suite alongside with unit test suite, given the power to execute both tests 
+in one shot. 
+
+You can set up what folders should mutation testing framework take in account to create mutants and test your logic, 
+and what folders should mutation testing exclude to create mutants.
+
+The following is the standard configuration for the project and resides on the [build.gradle](/build.gradle) file
+``` groovy
+  pitest {
+    targetClasses.set(["org.afp.dddmicroservice.*"])
+    targetTests.set(["org.afp.dddmicroservice.*"])
+    excludedClasses.set([
+            "org.afp.dddmicroservice.application.config.*",
+            "org.afp.dddmicroservice.application.model.*",
+            "org.afp.dddmicroservice.application.util.*",
+            "org.afp.dddmicroservice.core.domains.*",
+            "org.afp.dddmicroservice.core.util.*",
+            "org.afp.dddmicroservice.infrastructure.entities.*",
+            "org.afp.dddmicroservice.infrastructure.mappers.*"
+            ])
+    outputFormats.set(["HTML", "XML"])
+    junit5PluginVersion.set('0.15')
+    timestampedReports.set(false)
+    exportLineCoverage.set(true)
+  }
+```
+If you add new packages to the project, and you won't that mutation testing runs into your new code (because it's not core logic),
+you will need to update this configuration to be able to do that.
+- **targetClasses** packages containing classes that framework will use to inject mutants to the logic
+- **targetTest** packages containing classes that will test the core logic
+- **excludedClasses** array of packages to exclude inject mutants into that code
+- **outputFormats** array of formats that framework will generate when runs mutation testing
+- **junit5PluginVersion** This property needs to be set to work with JUnit5 version
+- **timestampedReports** Indicates whether the pitest report should be created by running date or override always when executed
+- **exportLineCoverage** Indicates whether the report should include line coverage based on the unit test executed
+
+The mutation testing results are located in the following path [/build/reports/pitest/index.html](/build/reports/pitest/index.html)
+
+For further information please read [pitest](https://pitest.org/) documentation
 
 ### OpenAPI 3 docs generating
 OpenAPI is becoming the standard facto to generate API documentations and be able to exported to third-party 
@@ -143,6 +196,12 @@ on the annotations placed in the code the OpenAPI 3 specification yaml files
 ./gradlew generateOpenApiDocs
 ```
 The output file is located on [/application/build/docs/open-api](/application/build/docs/open-api)  folder
+
+### Mappers
+
+### Metrics
+
+
 
 ### Guides
 The following guides illustrate how to use some features concretely:
